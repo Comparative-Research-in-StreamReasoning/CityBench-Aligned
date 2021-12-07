@@ -1,11 +1,11 @@
 # Aligned CityBench
 CityBench is a java-based benchmarking toolset for RSP engines, currently CQELS and C-SPARQL are supported.
 
-##Prerequisite
+## Prerequisite
 * JVM 1.7
 * Java IDE (for debugging and extensions)
 
-##Folders & Files
+## Folders & Files
 1. *cqels_query*: sample queries in CQELS syntax;
 2. *csparql_query*: sample queries in C-SPARQL syntax;
 3. *rspql_query*: sample queries in RSP-QL syntax;
@@ -19,13 +19,13 @@ CityBench is a java-based benchmarking toolset for RSP engines, currently CQELS 
 11. *EC-log*: logger file output;
 12. *citybench.properties*: configuration file loaded by CityBench.
 
-##To run
+## To run
 1. Provide 'CQELS_DB' folder if you want to run CQELS experiments
 2. Run ISWC2015-CityBench.jar with suitable arguments **OR**
 3. Import the project to your Java IDE and integrate all libraries (provided as jars in the li-folder) as dependencies
 4. Run CityBench.java
 
-##Configuration file
+## Configuration file
 * dataset = dataset/[your_sensor_repository_file]  // tell CityBench where to look for static background knowledge.
 * ontology = [your_ontology_folder] // tell CityBench where to look for ontologies used.
 * streams = [your_streams_folder] // tell CityBench where to look for raw data to simulate sensor streams.
@@ -36,7 +36,7 @@ CityBench is a java-based benchmarking toolset for RSP engines, currently CQELS 
 
 // All paths are relative path to the project root
 
-##Program Parameters
+## Program Parameters
 Acceptable params: 
 * _rate_ = (double)x, // sensor stream acceleration rate (based on real world sensor observation intervals)
 * _frequency_ = (double)c.  // fixed frequency for sensors, only has effects when rate=1.0
