@@ -1,0 +1,28 @@
+FROM static <http://localhost:12345/WebGlCity/RDF/SensorRepository.n3>
+FROM dynamic stream <http://localhost:12346/CityBenchDataStream/SampleEventService#AarhusTrafficData182955> [range 3000ms step 1000ms]
+FROM dynamic stream <http://localhost:12347/CityBenchDataStream/SampleEventService#AarhusTrafficData158505> [triples 3000]
+
+RStream
+
+QUERY:
+select ?obId1 ?obId2 ?v1 ?v2
+
+where {
+
+?p1   a <http://www.insight-centre.org/citytraffic#CongestionLevel>.
+?p2   a <http://www.insight-centre.org/citytraffic#CongestionLevel>.
+
+}
+WINDOW:
+{
+?obId1 <http://purl.oclc.org/NET/ssnx/ssn#observedProperty> ?p1.
+?obId1 <http://purl.oclc.org/NET/sao/hasValue> ?v1.
+?obId1 <http://purl.oclc.org/NET/ssnx/ssn#observedBy> <http://localhost/WebGlCity/SampleEventService#AarhusTrafficData182955>.
+}
+
+WINDOW:
+{
+?obId2 <http://purl.oclc.org/NET/ssnx/ssn#observedProperty> ?p2.
+?obId2 <http://purl.oclc.org/NET/sao/hasValue> ?v2.
+?obId2 <http://purl.oclc.org/NET/ssnx/ssn#observedBy> <http://localhost/WebGlCity/SampleEventService#AarhusTrafficData158505>.
+}

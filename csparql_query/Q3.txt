@@ -1,0 +1,24 @@
+select ?obId1  ?obId3  ?v1  ?v3   (((?v1+?v3)/2) as ?avgCongest)
+ FROM <http://localhost:12345/WebGlCity/RDF/SensorRepository.rdf>  
+from stream <http://localhost:12346/CityBenchDataStream/SampleEventService#AarhusTrafficData182955> [range 3s step 1s] 
+from stream <http://localhost:12347/CityBenchDataStream/SampleEventService#AarhusTrafficData158505> [range 3s step 1s] 
+where {
+
+{?p1   a <http://www.insight-centre.org/citytraffic#CongestionLevel>.} 
+{?p3   a <http://www.insight-centre.org/citytraffic#CongestionLevel>. }
+
+{?obId1 a ?ob.
+?obId1 <http://purl.oclc.org/NET/ssnx/ssn#observedProperty> ?p1.
+?obId1 <http://purl.oclc.org/NET/sao/hasValue> ?v1.
+?obId1 <http://purl.oclc.org/NET/ssnx/ssn#observedBy> <http://localhost/CityBenchDataStream/SampleEventService#AarhusTrafficData182955>.
+
+
+
+}
+{?obId3 a ?ob.
+?obId3 <http://purl.oclc.org/NET/ssnx/ssn#observedProperty> ?p3.
+?obId3 <http://purl.oclc.org/NET/sao/hasValue> ?v3.
+?obId3 <http://purl.oclc.org/NET/ssnx/ssn#observedBy> <http://localhost/CityBenchDataStream/SampleEventService#AarhusTrafficData158505>.
+
+
+}}

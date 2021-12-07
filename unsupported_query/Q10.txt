@@ -1,0 +1,18 @@
+FROM dynamic stream <http://www.insight-centre.org/dataset/SampleEventService#AarhusPollutionData201399> [range 3000ms step 1000ms]
+FROM dynamic stream <http://www.insight-centre.org/dataset/SampleEventService#AarhusPollutionData184892> [range 3000ms step 1000ms]
+
+select ?obId1 ?obId2 #?lat1 ?lon1 ?lat2 ?lon2 ?v1 ?v2 ((?v1+?v2) as ?sumOfAPI)
+
+where {
+
+{?obId1 a ?ob.
+?obId1 <http://purl.oclc.org/NET/ssnx/ssn#observedProperty> ?p1.
+?obId1 <http://purl.oclc.org/NET/sao/hasValue> ?v1.
+?obId1 <http://purl.oclc.org/NET/ssnx/ssn#observedBy> <http://www.insight-centre.org/dataset/SampleEventService#AarhusPollutionData201399>.
+}
+
+{?obId2 a ?ob.
+?obId2 <http://purl.oclc.org/NET/ssnx/ssn#observedProperty> ?p2.
+?obId2 <http://purl.oclc.org/NET/sao/hasValue> ?v2.
+?obId2 <http://purl.oclc.org/NET/ssnx/ssn#observedBy> <http://www.insight-centre.org/dataset/SampleEventService#AarhusPollutionData184892>.
+}}

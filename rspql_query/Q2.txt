@@ -1,0 +1,37 @@
+PREFIX ses: <http://localhost/CityBenchDataStream/SampleEventService#>
+PREFIX ct: <http://www.insight-centre.org/citytraffic#>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn#>
+PREFIX sao: <http://purl.oclc.org/NET/sao/>
+
+REGISTER RSTREAM <q2> AS
+
+SELECT ?obId1 ?obId2 ?obId3 ?obId4 ?v1 ?v2 ?v3 ?v4
+FROM NAMED <http://localhost:12345/WebGlCity/RDF/SensorRepository.rdf>
+FROM NAMED WINDOW <w1> ON <http://localhost:12346/CityBenchDataStream/SampleEventService#AarhusWeatherData0> [RANGE PT3S STEP PT1S]
+FROM NAMED WINDOW <w2> ON <http://localhost:12347/CityBenchDataStream/SampleEventService#AarhusTrafficData158505> [RANGE PT3S STEP PT1S]
+WHERE {
+
+	#?p1 a ct:Temperature .
+	#?p2 a ct:Humidity .
+	#?p3 a ct:WindSpeed .
+	#?p4 a ct:CongestionLevel .
+
+	WINDOW <w1> {
+		?obId1 ssn:observedProperty ?p1 ;
+			   sao:hasValue ?v1 ;
+			   ssn:observedBy ses:AarhusWeatherData0 .
+		?obId2 ssn:observedProperty ?p2 ;
+			   sao:hasValue ?v2 ;
+			   ssn:observedBy ses:AarhusWeatherData0 .
+		?obId3 ssn:observedProperty ?p3 ;
+			   sao:hasValue ?v3 ;
+			   ssn:observedBy ses:AarhusWeatherData0 .
+
+	}
+
+	WINDOW <w2> {
+		?obId4 ssn:observedProperty ?p4 ;
+			   sao:hasValue ?v4 ;
+			   ssn:observedBy ses:AarhusTrafficData158505 .
+	}
+}

@@ -1,0 +1,35 @@
+PREFIX ses: <http://localhost/CityBenchDataStream/SampleEventService#>
+PREFIX ct: <http://www.insight-centre.org/citytraffic#>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn#>
+PREFIX sao: <http://purl.oclc.org/NET/sao/>
+
+REGISTER RSTREAM <q5> AS
+
+SELECT ?evtId ?title ?lat1 ?lon1 ?obId2  ?lat2 ?lon2 ?foi2
+FROM <http://localhost:12345/WebGlCity/RDF/SensorRepository.rdf>
+FROM <http://localhost:12346/WebGlCity/RDF/AarhusCulturalEvents.rdf>
+FROM NAMED WINDOW <w1> ON <http://localhost:12347/CityBenchDataStream/SampleEventService#AarhusTrafficData158505> [RANGE PT3S STEP PT1S]
+WHERE {
+
+
+	WINDOW <w1> {
+        ?p1 a ct:CongestionLevel ;
+            			ssn:isPropertyOf ?foi2 .
+		?foi2 ct:hasStartLatitude ?lat2 ;
+                    		  ct:hasStartLongitude ?lon2 .
+		?evtId a ?ob ;
+            			   ssn:featureOfInterest ?foi ;
+            			   sao:value ?title .
+
+           		?foi ct:hasFirstNode ?node .
+
+           		?node ct:hasLatitude ?lat1 .
+            		?node ct:hasLongitude ?lon1 .
+
+		?obId2 a ?ob ;
+				 ssn:observedProperty ?p1 ;
+				 ssn:observedBy ses:AarhusTrafficData158505 ;
+				 sao:hasValue ?v2 .
+	}
+	FILTER (((?lat2-?lat1)*(?lat2-?lat1)+(?lon2-?lon1)*(?lon2-?lon1)) < 0.1)
+}

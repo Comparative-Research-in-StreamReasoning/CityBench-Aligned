@@ -1,0 +1,26 @@
+PREFIX ses: <http://localhost/CityBenchDataStream/SampleEventService#>
+PREFIX ct: <http://www.insight-centre.org/citytraffic#>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn#>
+PREFIX sao: <http://purl.oclc.org/NET/sao/>
+
+REGISTER RSTREAM <q12> AS
+
+SELECT ?service ?p
+FROM <http://localhost:12345/WebGlCity/RDF/SensorRepository.rdf>
+FROM NAMED WINDOW <w1> ON <http://localhost:12347/CityBenchDataStream/SampleEventService#AarhusTrafficData186979> [RANGE PT3S STEP PT1S]
+WHERE {
+
+	?p   a ct:CongestionLevel.
+
+
+	WINDOW <w1> {
+		?obId1 a ?ob ;
+			   ssn:observedProperty ?p ;
+			   sao:hasValue ?v1 ;
+			   ssn:observedBy ?service .
+	}
+ FILTER(?v1 >= -1)
+
+}
+GROUP BY ?service
+HAVING (count(?obId1) > 3)

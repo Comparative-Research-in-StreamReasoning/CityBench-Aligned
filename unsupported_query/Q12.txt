@@ -1,0 +1,21 @@
+FROM static <http://localhost/WebGlCity/RDF/SensorRepository.ofn>
+FROM dynamic stream <http://www.insight-centre.org/dataset/SampleEventService#AarhusTrafficData186979> [range 3000ms step 1000ms]
+
+select (count(?obId1) as ?obCnt) 
+
+where {
+
+?p1   a <http://www.insight-centre.org/citytraffic#CongestionLevel>.
+
+
+
+{?obId1 a ?ob.
+?obId1 <http://purl.oclc.org/NET/ssnx/ssn#observedProperty> ?p1.
+?obId1 <http://purl.oclc.org/NET/sao/hasValue> ?v1.
+?obId1 <http://purl.oclc.org/NET/ssnx/ssn#observedBy> ?service1.
+}
+#Filter(?v1 >= -1)
+}
+group by ?service1 
+
+having (count(?obId1) > 3)

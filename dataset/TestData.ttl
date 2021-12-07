@@ -1,0 +1,30 @@
+@prefix : <http://www.semanticweb.org/nathangruber2001/ontologies/2021/4/untitled-ontology-4#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+[ rdf:type owl:Ontology
+ ] .
+
+
+<http://wwwict-citypulseeu/ontologies/userprofile#user-001> rdf:type <http://wwwict-citypulseeu/ontologies/userprofile#human> .
+
+<http://wwwict-citypulseeu/ontologies/userprofile#user-002> rdf:type <http://wwwict-citypulseeu/ontologies/userprofile#human> .
+
+<http://wwwict-citypulseeu/ontologies/userprofile#user-003> rdf:type <http://wwwict-citypulseeu/ontologies/userprofile#human> .
+
+<http://wwwict-citypulseeu/ontologies/userprofile#user-004> rdf:type <http://wwwict-citypulseeu/ontologies/userprofile#human> .
+
+<http://wwwict-citypulseeu/ontologies/userprofile#user-005> rdf:type <http://wwwict-citypulseeu/ontologies/userprofile#human> .
+
+<http://wwwict-citypulseeu/ontologies/userprofile#user-006> rdf:type <http://wwwict-citypulseeu/ontologies/userprofile#human> .
+
+<http://wwwict-citypulseeu/ontologies/userprofile#user-007> rdf:type <http://wwwict-citypulseeu/ontologies/userprofile#human> .
+
+<http://wwwict-citypulseeu/ontologies/userprofile#user-008> rdf:type <http://wwwict-citypulseeu/ontologies/userprofile#human> .
+
+<http://wwwict-citypulseeu/ontologies/userprofile#user-009> rdf:type <http://wwwict-citypulseeu/ontologies/userprofile#human> .
+

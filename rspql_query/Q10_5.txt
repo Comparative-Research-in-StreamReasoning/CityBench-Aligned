@@ -1,0 +1,49 @@
+PREFIX ses: <http://localhost/CityBenchDataStream/SampleEventService#>
+PREFIX ct: <http://www.insight-centre.org/citytraffic#>
+PREFIX ssn: <http://purl.oclc.org/NET/ssnx/ssn#>
+PREFIX sao: <http://purl.oclc.org/NET/sao/>
+
+REGISTER RSTREAM <q10_5> AS
+
+SELECT ?obId1 ?obId2 ?obId3 ?obId4 ?obId5
+
+FROM NAMED WINDOW <w1> ON <http://localhost:12347/CityBenchDataStream/SampleEventService#AarhusPollutionData182955> [RANGE PT3S STEP PT1S]
+FROM NAMED WINDOW <w2> ON <http://localhost:12348/CityBenchDataStream/SampleEventService#AarhusPollutionData158505> [RANGE PT3S STEP PT1S]
+FROM NAMED WINDOW <w3> ON <http://localhost:12349/CityBenchDataStream/SampleEventService#AarhusPollutionData206502> [RANGE PT3S STEP PT1S]
+FROM NAMED WINDOW <w4> ON <http://localhost:12350/CityBenchDataStream/SampleEventService#AarhusPollutionData179093> [RANGE PT3S STEP PT1S]
+FROM NAMED WINDOW <w5> ON <http://localhost:12351/CityBenchDataStream/SampleEventService#AarhusPollutionData195843> [RANGE PT3S STEP PT1S]
+
+WHERE {
+	WINDOW <w1> {
+		?obId1 a ?ob ;
+			   ssn:observedProperty ?p1 ;
+			   sao:hasValue ?v1 ;
+			   ssn:observedBy ses:AarhusPollutionData182955 .
+	}
+
+	WINDOW <w2> {
+		?obId2 a ?ob ;
+			   ssn:observedProperty ?p2 ;
+			   sao:hasValue ?v2 ;
+			   ssn:observedBy ses:AarhusPollutionData158505 .
+		}
+	WINDOW <w3> {
+    		?obId3 a ?ob ;
+    			   ssn:observedProperty ?p3 ;
+    			   sao:hasValue ?v3 ;
+    			   ssn:observedBy ses:AarhusPollutionData206502 .
+    	}
+
+    	WINDOW <w4> {
+    		?obId4 a ?ob ;
+    			   ssn:observedProperty ?p4 ;
+    			   sao:hasValue ?v4 ;
+    			   ssn:observedBy ses:AarhusPollutionData179093 .
+    		}
+    WINDOW <w5> {
+    		?obId5 a ?ob ;
+    			   ssn:observedProperty ?p5 ;
+    			   sao:hasValue ?v5 ;
+    			   ssn:observedBy ses:AarhusPollutionData195843 .
+    	}
+}
